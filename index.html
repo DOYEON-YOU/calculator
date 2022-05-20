@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <style>
+      * {
+        text-align: center;
+        margin: auto;
+        background-color: rgb(234, 245, 255);
+        cursor: url(/cursors/35b1ec3c279a4dc49f1b0d5a9cc163361GRHcVlKrwgY5t8N-0.png),
+          auto !important;
+      }
+
+      h1 {
+        margin-top: 80px;
+        color: rgb(94, 179, 248);
+        text-shadow: 1px 2px 3px rgb(216, 234, 255);
+      }
+
+      #hint {
+        width: 620px;
+        height: 30px;
+        padding: 25px 0px 55px 0px;
+        border-radius: 100px;
+        background-color: rgb(248, 252, 255);
+        border: 5px solid rgb(75, 163, 235);
+        margin-top: 110px;
+        color: rgb(125, 191, 245);
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      #hint:hover {
+        transition: all 0.5s;
+        background-color: rgb(125, 191, 245);
+        color: white;
+        border: 5px solid rgb(125, 191, 245);
+        cursor: url(/cursors/35b1ec3c279a4dc49f1b0d5a9cc163361GRHcVlKrwgY5t8N-0.png),
+          auto !important;
+        box-shadow: 5px 5px 15px 5px rgb(186, 214, 240);
+        text-shadow: 5px 5px 10px rgb(0, 127, 212);
+      }
+
+      #hint:not(hover) {
+        transition: all 0.5s;
+      }
+
+      #calform {
+        margin-top: 90px;
+        background-color: rgb(204, 228, 255);
+        width: 360px;
+        height: 700px;
+        text-align: center;
+        border-radius: 120px;
+        box-shadow: 6px 6px 20px rgb(0, 99, 212);
+      }
+
+      #calform:hover {
+        cursor: default;
+        transition: all 2s;
+        background-color: rgb(146, 197, 255);
+      }
+
+      #calform:not(hover) {
+        transition: all 2s;
+      }
+
+      #result {
+        text-align: right;
+        width: 260px;
+        height: 40px;
+        margin-top: 60px;
+        margin-bottom: 7px;
+        font-size: 14px;
+        font-weight: bolder;
+        color: rgb(125, 191, 245);
+        border: 3px solid rgb(111, 178, 240);
+        background-color: rgb(236, 244, 252);
+        border-radius: 10px;
+        box-shadow: 1px 3px 5px rgb(0, 127, 212);
+      }
+
+      #procedure:hover {
+        cursor: default;
+      }
+
+      #procedure:focus {
+        outline: none;
+      }
+
+      #procedure::placeholder {
+        color: rgba(67, 163, 218, 0.5);
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      #procedure {
+        text-align: right;
+        width: 260px;
+        height: 40px;
+        font-size: 14px;
+        font-weight: bolder;
+        color: rgb(125, 191, 245);
+        border: 3px solid rgb(111, 178, 240);
+        background-color: rgb(236, 244, 252);
+        border-radius: 10px;
+        box-shadow: 1px 3px 5px rgb(0, 127, 212);
+      }
+
+      #result:hover {
+        cursor: default;
+      }
+
+      #result::placeholder {
+        color: rgba(67, 163, 218, 0.5);
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      #result:focus {
+        outline: none;
+      }
+
+      .number {
+        width: 60px;
+        height: 60px;
+        background-color: rgb(146, 206, 255);
+        color: white;
+        border: 1px solid white;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 5px;
+        margin-right: 5px;
+        box-shadow: 2px 2px 10px rgb(0, 127, 212);
+      }
+
+      .number:hover {
+        cursor: url(/cursors/239bbbae137e4496e61e4e919087fd64lOJhcb1AzsdGjJE2-0.png),
+          auto !important;
+        transition: all 0.3s;
+        cursor: pointer;
+        background-color: rgb(199, 228, 255);
+        border: 1px solid white;
+        color: rgb(89, 175, 255);
+      }
+
+      .number:not(hover) {
+        transition: all 0.3s;
+      }
+
+      .number:active {
+        transition: all 0.2s;
+        background-color: white;
+        color: rgb(125, 191, 245);
+        border: 1px solid rgb(125, 191, 245);
+        font-weight: bolder;
+        font-size: 14px;
+      }
+
+      .fun {
+        width: 60px;
+        height: 60px;
+        background-color: white;
+        color: rgb(125, 191, 245);
+        border: 1px solid rgb(125, 191, 245);
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 5px;
+        margin-right: 5px;
+        box-shadow: 2px 2px 10px rgb(0, 127, 212);
+        margin-left: 3px;
+      }
+
+      .fun:hover {
+        transition: all 0.3s;
+        cursor: url(/cursors/239bbbae137e4496e61e4e919087fd64lOJhcb1AzsdGjJE2-0.png),
+          auto !important;
+        background-color: rgb(199, 228, 255);
+        border: 1px solid white;
+        color: rgb(89, 175, 255);
+      }
+
+      .fun:not(hover) {
+        transition: all 0.3s;
+      }
+
+      .fun:active {
+        transition: all 0.2s;
+        background-color: rgb(125, 191, 245);
+        color: white;
+        border: 1px solid white;
+        font-weight: bolder;
+        font-size: 14px;
+      }
+
+      #submit {
+        margin-top: 25px;
+        margin-right: 7px;
+        width: 280px;
+        height: 60px;
+        border-radius: 30px;
+        background-color: rgb(177, 220, 255);
+        color: white;
+        border: 2px solid white;
+        box-shadow: 3px 3px 4px rgb(0, 127, 212);
+        font-size: 20px;
+        font-weight: bold;
+        text-shadow: 2px 2px 5px rgb(0, 127, 212);
+      }
+
+      #submit:hover {
+        transition: all 0.5s;
+        cursor: url(/cursors/239bbbae137e4496e61e4e919087fd64lOJhcb1AzsdGjJE2-0.png),
+          auto !important;
+        background-color: rgb(233, 244, 255);
+        color: rgb(89, 175, 255);
+        text-shadow: 3px 3px 5px rgb(191, 230, 255);
+      }
+
+      #submit:not(hover) {
+        transition: all 0.5s;
+      }
+
+      #submit:active {
+        text-shadow: 2px 2px 5px rgb(0, 101, 168);
+        box-shadow: 3px 3px 7px rgb(36, 138, 255);
+        background-color: rgb(61, 161, 255);
+        border: 2px solid white;
+        color: white;
+      }
+
+      .blank {
+        width: 60px;
+        height: 60px;
+        margin-left: 5px;
+        margin-right: 5px;
+        background-color: rgba(0, 0, 0, 0);
+        border: rgba(0, 0, 0, 0);
+      }
+
+      .blank:hover {
+        cursor: default;
+      }
+
+      #zero {
+        width: 138px;
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+
+      #allclear {
+        background-color: rgb(33, 127, 216);
+        color: white;
+        border: 1px solid white;
+        font-size: 16px;
+        height: 60px;
+        width: 60px;
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+
+      #allclear:hover {
+        transition: all 0.5s;
+        background-color: rgb(199, 228, 255);
+        border: 1px solid white;
+        color: rgb(89, 175, 255);
+      }
+
+      #allclear:not(hover) {
+        transition: all 0.5s;
+      }
+
+      #allclear:active {
+        transition: all 0.2s;
+        font-size: 14px;
+        background-color: rgb(0, 127, 212);
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>계산기를 통해 사칙연산 하고<br />양수인지 음수인지 판별하기</h1>
+    <div id="calform">
+      <input type="text" id="result" placeholder="결과값 " readonly />
+      <input
+        type="text"
+        id="procedure"
+        placeholder="수식을 입력하세요... "
+        readonly
+      /><br /><br />
+      <input
+        type="submit"
+        value="AC"
+        class="fun"
+        id="allclear"
+        onclick="clearAll()"
+      />
+      <input type="submit" value=" " class="blank" />
+      <input
+        type="submit"
+        value="BACK"
+        id="backSpace"
+        class="fun"
+        onclick="backSpace()"
+      />
+      <input
+        type="submit"
+        value="/"
+        class="fun"
+        onclick="add('/')"
+      /><br /><br />
+      <input type="submit" value="7" class="number" onclick="add(7)" />
+      <input type="submit" value="8" class="number" onclick="add(8)" />
+      <input type="submit" value="9" class="number" onclick="add(9)" />
+      <input
+        type="submit"
+        value="*"
+        class="fun"
+        onclick="add('*')"
+      /><br /><br />
+      <input type="submit" value="4" class="number" onclick="add(4)" />
+      <input type="submit" value="5" class="number" onclick="add(5)" />
+      <input type="submit" value="6" class="number" onclick="add(6)" />
+      <input
+        type="submit"
+        value="-"
+        class="fun"
+        onclick="add('-')"
+      /><br /><br />
+      <input type="submit" value="1" class="number" onclick="add(1)" />
+      <input type="submit" value="2" class="number" onclick="add(2)" />
+      <input type="submit" value="3" class="number" onclick="add(3)" />
+      <input
+        type="submit"
+        value="+"
+        class="fun"
+        onclick="add('+')"
+      /><br /><br />
+      <input
+        type="submit"
+        value="0"
+        class="number"
+        id="zero"
+        onclick="add(0)"
+      />
+      <input type="submit" value="." class="fun" onclick="add('.')" />
+      <input
+        type="submit"
+        value="="
+        class="fun"
+        id="equal"
+        onclick="calculate()"
+      />
+      <button id="submit" onclick="ale()">결과값을 제출해 판별하기</button>
+    </div>
+    <p id="hint">
+      위 버튼을 눌렀을 때, 결과값이 1 이상이면 양수라는 알림창이 뜨고,<br />
+      결과값이 0 미만이면 음수라는 알림창이,<br />
+      결과값이 0이면 0이라는 알림창이 뜹니다.
+    </p>
+    <script>
+      function add(char) {
+        let display = document.getElementById('procedure');
+        display.value = display.value + char;
+      }
+
+      function calculate() {
+        let display = document.getElementById('procedure');
+        let result = eval(display.value);
+        document.getElementById('result').value = result;
+      }
+
+      function ale() {
+        let value = document.getElementById('result').value;
+        if (value >= 1) {
+          alert('양수입니다.');
+        } else if (value < 0) {
+          alert('음수입니다.');
+        } else {
+          alert('0입니다.');
+        }
+        document.getElementById('result').value = '';
+        document.getElementById('procedure').value = '';
+      }
+
+      function clearAll() {
+        document.getElementById('result').value = '';
+        document.getElementById('procedure').value = '';
+      }
+
+      function backSpace() {
+        let display = document.getElementById('procedure');
+        let disValue = display.value;
+        let delNum = disValue.substring(0, disValue.length - 1);
+        display.value = delNum;
+      }
+    </script>
+  </body>
+</html>
